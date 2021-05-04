@@ -1,12 +1,12 @@
 import spotipy
 import json
-import flask
+import flask, os
 from spotipy.oauth2 import SpotifyOAuth
 from flask_restful import Resource, Api
 from flask_cors import CORS
 
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id='513f41055fe74def8c2a9236458d8dcb',
-                                               client_secret='5c37d1a354a743ed97dcb8b797b86cb0',
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=os.environ['CLIENT_ID'],
+                                               client_secret=os.environ['CLIENT_SECRET'],
                                                redirect_uri='http://example.com/',
                                                scope='user-read-playback-state'))
 app = flask.Flask(__name__)
