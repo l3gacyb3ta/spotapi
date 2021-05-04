@@ -16,18 +16,6 @@ CORS(app)
 class Song(Resource):
   def __init__(self):
     super().__init__()
-    results = sp.current_user_playing_track()
-
-    url = results['item']['album']['images'][1]['url']
-    name = results['item']['name']
-    artist = results['item']['album']['artists'][0]['name']
-    title = name + ' - ' + artist
-
-    jsondata = json.dumps({'title': title, 'image': url})
-    resp = flask.Response(response=jsondata,
-              status=200,
-              mimetype="application/json")
-    self.latest = resp
 
   def get(self):
       try:
@@ -45,7 +33,9 @@ class Song(Resource):
         self.latest = resp
         return (resp)
       except:
-        return self.latest
+        return flask.Response(response=json.dumps({"title" : "Nothing rn, sorry!", "image" : "https://cdn.shopify.com/s/files/1/3013/1908/products/LCD-1_PS3_2000x.jpg?v=1584599044"}),
+                  status=200,
+                  mimetype="application/json")
 
 api.add_resource(Song, '/')
 
