@@ -1,4 +1,5 @@
 flask
 spotipy
+gunicorn
 flask_cors
 flask_restful
